@@ -1,0 +1,98 @@
+<html>
+ <head>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+ <script>
+
+   function submitPress(i) {
+    fetch(`https://6qp8zcn08g.execute-api.us-east-1.amazonaws.com/dev/add-visitor?name=${document.getElementById("1."+i).value}&phone=${document.getElementById("2."+i).value}&s3_image=${document.getElementById("4."+i).value}`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+  .then((res)=>{
+    res.json().then((responseObject)=>{
+      console.log(responseObject)
+      document.getElementById("3."+i).value = "Added"
+      document.getElementById("3."+i).style.color = "#ff0000"
+    }).catch((e)=>{
+      console.log(e)
+    })
+  })
+  .catch((a)=>{
+    setTimeout(() => {
+      appendMessage(BOT_NAME, BOT_IMG, "left", "I don't understand that!");
+    }, delay);
+  })
+   }
+
+$(document).ready(() => {
+
+var images={};
+fetch('https://6qp8zcn08g.execute-api.us-east-1.amazonaws.com/dev/get-visitor')
+.then(response => response.json())
+.then(data => {
+  for (i in data) {
+    var p = i
+    var ele = document.createElement("div");
+    var img = document.createElement("img");
+    img.setAttribute("src", data[i].link);
+    img.height = 250
+    ele.appendChild(img);
+    
+    var a = document.createElement("input"); //input element, text
+    a.setAttribute('type',"text");
+    a.setAttribute('name',"username");
+    a.setAttribute('placeholder',"name");
+    a.setAttribute('id',"1."+i);
+    var j = document.createElement("input"); //input element, text
+    j.setAttribute('type',"text");
+    j.setAttribute('name',"phone");
+    j.setAttribute('placeholder',"phone");
+    j.setAttribute('id',"2."+i);
+
+    var k = document.createElement("input"); //input element, text
+    k.setAttribute('type',"text");
+    k.setAttribute('name',"phone");
+    k.style.color = "#ffffff";
+    k.setAttribute('id',"3."+i);
+
+    var t = document.createElement("input"); //input element, text
+    t.setAttribute('type',"text");
+    t.setAttribute('name',"phone");
+    t.style.color = "#ffffff";
+    t.setAttribute('value',data[i].s3_image);
+    t.setAttribute('id',"4."+i);
+
+    var btn = document.createElement("BUTTON");
+    btn.setAttribute('id', i)
+    btn.innerHTML = "add";
+    btn.onclick = (pp) => {
+      console.log(pp)
+      submitPress(pp.toElement.id)
+    };
+    ele.appendChild(a);
+    ele.appendChild(j);
+    ele.appendChild(btn);
+    ele.appendChild(k);
+    ele.appendChild(t);
+
+    var elem=document.getElementById('emoji').appendChild(ele);
+  }
+})
+.catch(err => console.error(err));
+}
+);
+ </script>
+ </head>
+ <body>
+<div id="emoji">
+          <ul id="emojiz"></ul>
+          <span style="display:inline;"><img src=""></span>
+          <span style="display:inline; "><img src=""></span>
+          <span style="display:inline;"><img src=""></span>
+          <span style="display:inline; "><img src=""></span>
+</div>
+ </body>
+</html>

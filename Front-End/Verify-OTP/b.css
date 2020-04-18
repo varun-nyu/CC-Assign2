@@ -1,0 +1,13 @@
+.save-random {
+  border-top: 1px solid #000;
+  width: 200px;
+  margin-top: 20px;
+}
+.save-random b {
+  border: 1px solid #000;
+  border-top: 0;
+  background: #FF5722;
+  padding: 5px 20px;
+  font-weight: normal;
+  display: block;
+}
