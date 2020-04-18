@@ -15,4 +15,4 @@ Verify OTP : https://ccassignment-2.s3.amazonaws.com/Front-End/Verify-OTP/a.html
 
 ![Screenshot](OUTPUT1.png)
 ![Screenshot](OUTPUT2.png)
-![Screenshot](OUTPUT3.jpg)
+![Screenshot](OUTPUT3.jpeg)
